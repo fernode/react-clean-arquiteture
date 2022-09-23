@@ -1,8 +1,8 @@
-type body = {
+export type AuthenticationParams = {
   email: string;
   password: string;
 };
 
 export interface HttpPostClient {
-  post(url: string, body: body): Promise<void>;
+  post(url: string, body: AuthenticationParams): Promise<void>;
 }

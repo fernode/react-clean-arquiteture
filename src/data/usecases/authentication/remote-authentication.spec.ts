@@ -1,23 +1,16 @@
+import { faker } from "@faker-js/faker";
 import { describe, expect, it } from "vitest";
-import { HttpPostClient } from "../../protocols/http/http-post-client";
+import { MockAuthentication } from "../../../domain/test/mock-authentication";
+import { HttpPostClientSpy } from "../../test/mock-http-client";
 import { RemoteAuthentication } from "./remote-authentication";
 
 describe("RemoteAuthentication", () => {
   it("should call httpPostClient with correct url", async () => {
-    class HttpPostClientSpy implements HttpPostClient {
-      url?: string;
-
-      async post(url: string, body: {}): Promise<void> {
-        this.url = url;
-        return Promise.resolve();
-      }
-    }
-
-    const url = "teste";
+    const url = faker.internet.url();
     const httpClientSpy = new HttpPostClientSpy();
 
     const sut = new RemoteAuthentication(url, httpClientSpy);
-    await sut.auth();
+    await sut.auth(MockAuthentication());
 
     expect(httpClientSpy.url).toBe(url);
   });
