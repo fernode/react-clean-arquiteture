@@ -1,7 +1,7 @@
+import { HttpPostClientSpy } from "@/data/test/mock-http-client";
+import { MockAuthentication } from "@/domain/test/mock-authentication";
 import { faker } from "@faker-js/faker";
 import { describe, expect, it } from "vitest";
-import { MockAuthentication } from "../../../domain/test/mock-authentication";
-import { HttpPostClientSpy } from "../../test/mock-http-client";
 import { RemoteAuthentication } from "./remote-authentication";
 
 describe("RemoteAuthentication", () => {
