@@ -1,6 +1,7 @@
 import { HttpStatusCode } from "@/data/protocols/http/http-response";
 import { HttpPostClientSpy } from "@/data/test/mock-http-client";
 import { InvalidCrendencialsError } from "@/domain/errors/invalid-credencial-error";
+import { ServerError } from "@/domain/errors/server-error";
 import { UnexpectedError } from "@/domain/errors/unexpected-error";
 import { MockAuthentication } from "@/domain/test/mock-authentication";
 import { faker } from "@faker-js/faker";
@@ -24,7 +25,9 @@ describe("RemoteAuthentication", () => {
   it("should call httpPostClient with correct url", async () => {
     const url = faker.internet.url();
     const { sut, httpClientSpy } = makeSut(url);
-
+    httpClientSpy.response = {
+      status: HttpStatusCode.ok,
+    };
     await sut.auth(MockAuthentication());
 
     expect(httpClientSpy.url).toBe(url);
@@ -33,6 +36,9 @@ describe("RemoteAuthentication", () => {
   it("should call httpPostClient with correct body", async () => {
     const { sut, httpClientSpy } = makeSut();
     const body = MockAuthentication();
+    httpClientSpy.response = {
+      status: HttpStatusCode.ok,
+    };
     await sut.auth(body);
 
     expect(httpClientSpy.body).toEqual(body);
@@ -58,5 +64,16 @@ describe("RemoteAuthentication", () => {
     const promise = sut.auth(MockAuthentication());
 
     expect(promise).rejects.toThrow(new UnexpectedError());
+  });
+
+  it("Should throw ServerError if HttpClient returns 500", async () => {
+    const { sut, httpClientSpy } = makeSut();
+    httpClientSpy.response = {
+      status: HttpStatusCode.serverError,
+    };
+
+    const promise = sut.auth(MockAuthentication());
+
+    expect(promise).rejects.toThrow(new ServerError());
   });
 });
