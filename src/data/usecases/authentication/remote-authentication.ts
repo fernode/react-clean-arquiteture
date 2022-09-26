@@ -4,6 +4,7 @@ import {
 } from "@/data/protocols/http/http-post-client";
 import { HttpStatusCode } from "@/data/protocols/http/http-response";
 import { InvalidCrendencialsError } from "@/domain/errors/invalid-credencial-error";
+import { ServerError } from "@/domain/errors/server-error";
 import { UnexpectedError } from "@/domain/errors/unexpected-error";
 
 export class RemoteAuthentication {
@@ -16,12 +17,14 @@ export class RemoteAuthentication {
     const response = await this.httpPostClient.post(this.url, params);
 
     switch (response.status) {
+      case HttpStatusCode.ok:
+        break;
       case HttpStatusCode.unauthorized:
         throw new InvalidCrendencialsError();
-      case HttpStatusCode.badRequest:
-        throw new UnexpectedError();
+      case HttpStatusCode.serverError:
+        throw new ServerError();
       default:
-        await Promise.resolve();
+        throw new UnexpectedError();
     }
   }
 }
