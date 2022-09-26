@@ -1,6 +1,7 @@
 import { HttpStatusCode } from "@/data/protocols/http/http-response";
 import { HttpPostClientSpy } from "@/data/test/mock-http-client";
 import { InvalidCrendencialsError } from "@/domain/errors/invalid-credencial-error";
+import { UnexpectedError } from "@/domain/errors/unexpected-error";
 import { MockAuthentication } from "@/domain/test/mock-authentication";
 import { faker } from "@faker-js/faker";
 import { describe, expect, it } from "vitest";
@@ -46,5 +47,16 @@ describe("RemoteAuthentication", () => {
     const promise = sut.auth(MockAuthentication());
 
     expect(promise).rejects.toThrow(new InvalidCrendencialsError());
+  });
+
+  it("Should throw UnexpectedErorr if HttpClient returns 400", async () => {
+    const { sut, httpClientSpy } = makeSut();
+    httpClientSpy.response = {
+      status: HttpStatusCode.badRequest,
+    };
+
+    const promise = sut.auth(MockAuthentication());
+
+    expect(promise).rejects.toThrow(new UnexpectedError());
   });
 });
