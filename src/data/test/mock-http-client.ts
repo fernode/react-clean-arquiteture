@@ -1,6 +1,6 @@
 import {
-  AuthenticationParams,
   HttpPostClient,
+  HttpPostClientParams,
 } from "@/data/protocols/http/http-post-client";
 import {
   HttpResponse,
@@ -9,17 +9,28 @@ import {
 import { InvalidCrendencialsError } from "@/domain/errors/invalid-credencial-error";
 import { ServerError } from "@/domain/errors/server-error";
 import { UnexpectedError } from "@/domain/errors/unexpected-error";
+import { AccountModel } from "@/domain/model/account-model";
+import { AuthenticationParams } from "@/domain/usecases/authentication";
+import { faker } from "@faker-js/faker";
 
-export class HttpPostClientSpy implements HttpPostClient {
+export class HttpPostClientSpy
+  implements HttpPostClient<AuthenticationParams, AccountModel>
+{
   url?: string;
   body?: AuthenticationParams;
-  response: HttpResponse = {
-    status: HttpStatusCode.noContent,
+  response: HttpResponse<AccountModel> = {
+    status: HttpStatusCode.ok,
+    body: {
+      name: faker.name.fullName(),
+      accessToken: faker.datatype.uuid(),
+    },
   };
 
-  async post(url: string, body: AuthenticationParams): Promise<HttpResponse> {
-    this.url = url;
-    this.body = body;
+  async post(
+    params: HttpPostClientParams<AuthenticationParams>
+  ): Promise<HttpResponse<AccountModel>> {
+    this.url = params.url;
+    this.body = params.body;
 
     switch (this.response.status) {
       case HttpStatusCode.ok:

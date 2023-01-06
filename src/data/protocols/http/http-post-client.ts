@@ -1,10 +1,10 @@
 import { HttpResponse } from "./http-response";
 
-export type AuthenticationParams = {
-  email: string;
-  password: string;
+export type HttpPostClientParams<T> = {
+  url: string;
+  body: T;
 };
 
-export interface HttpPostClient {
-  post(url: string, body: AuthenticationParams): Promise<HttpResponse>;
+export interface HttpPostClient<T, R> {
+  post(params: HttpPostClientParams<T>): Promise<HttpResponse<R>>;
 }
