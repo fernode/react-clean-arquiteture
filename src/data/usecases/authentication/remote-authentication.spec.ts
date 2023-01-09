@@ -1,4 +1,4 @@
-import { HttpStatusCode } from "@/data/protocols/http/http-response";
+import { HttpStatusCode } from "@/data/protocols/http";
 import { HttpPostClientSpy } from "@/data/test/mock-http-client";
 import { InvalidCrendencialsError } from "@/domain/errors/invalid-credencial-error";
 import { ServerError } from "@/domain/errors/server-error";

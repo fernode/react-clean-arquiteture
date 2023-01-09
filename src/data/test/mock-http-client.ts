@@ -1,11 +1,10 @@
 import {
   HttpPostClient,
   HttpPostClientParams,
-} from "@/data/protocols/http/http-post-client";
-import {
   HttpResponse,
   HttpStatusCode,
-} from "@/data/protocols/http/http-response";
+} from "@/data/protocols/http";
+
 import { InvalidCrendencialsError } from "@/domain/errors/invalid-credencial-error";
 import { ServerError } from "@/domain/errors/server-error";
 import { UnexpectedError } from "@/domain/errors/unexpected-error";

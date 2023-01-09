@@ -1,9 +1,8 @@
-import { HttpPostClient } from "@/data/protocols/http/http-post-client";
-import { HttpStatusCode } from "@/data/protocols/http/http-response";
+import { HttpPostClient, HttpStatusCode } from "@/data/protocols/http";
 import { InvalidCrendencialsError } from "@/domain/errors/invalid-credencial-error";
 import { ServerError } from "@/domain/errors/server-error";
 import { UnexpectedError } from "@/domain/errors/unexpected-error";
-import { AccountModel } from "@/domain/model/account-model";
+import { AccountModel } from "@/domain/model";
 import {
   Authentication,
   AuthenticationParams,
