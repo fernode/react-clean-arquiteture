@@ -10,7 +10,6 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:staged": "vitest related",
     "test:ui": "vitest --ui",
     "prepare": "husky install"
   },
