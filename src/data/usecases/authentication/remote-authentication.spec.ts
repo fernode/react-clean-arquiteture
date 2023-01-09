@@ -3,7 +3,10 @@ import { HttpPostClientSpy } from "@/data/test/mock-http-client";
 import { InvalidCrendencialsError } from "@/domain/errors/invalid-credencial-error";
 import { ServerError } from "@/domain/errors/server-error";
 import { UnexpectedError } from "@/domain/errors/unexpected-error";
-import { MockAuthentication } from "@/domain/test/mock-authentication";
+import {
+  MockAccountModel,
+  MockAuthentication,
+} from "@/domain/test/mock-account";
 import { faker } from "@faker-js/faker";
 import { describe, expect, it } from "vitest";
 import { RemoteAuthentication } from "./remote-authentication";
@@ -75,5 +78,18 @@ describe("RemoteAuthentication", () => {
     const promise = sut.auth(MockAuthentication());
 
     expect(promise).rejects.toThrow(new ServerError());
+  });
+
+  it("Should return correct result if returns 200", async () => {
+    const { sut, httpClientSpy } = makeSut();
+    const httpResult = MockAccountModel();
+    httpClientSpy.response = {
+      status: HttpStatusCode.ok,
+      body: httpResult,
+    };
+
+    await sut.auth(MockAuthentication());
+
+    expect(httpClientSpy.response.body).toEqual(httpResult);
   });
 });
