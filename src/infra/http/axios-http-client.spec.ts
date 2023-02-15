@@ -4,10 +4,11 @@ import { describe, expect, it, vi } from "vitest";
 import { AxiosHttpClient } from "./axios-http-client";
 
 vi.mock("axios");
+const makeSut = () => new AxiosHttpClient();
 
 describe("AxiosHttpClient", () => {
   it("should call axios with correct url", () => {
-    const sut = new AxiosHttpClient();
+    const sut = makeSut();
     const url = faker.internet.url();
 
     sut.post({ url, body: {} });
