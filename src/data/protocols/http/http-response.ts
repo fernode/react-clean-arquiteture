@@ -9,6 +9,6 @@ export enum HttpStatusCode {
 }
 
 export interface HttpResponse<T> {
-  status: HttpStatusCode;
+  statusCode: HttpStatusCode;
   body?: T;
 }
