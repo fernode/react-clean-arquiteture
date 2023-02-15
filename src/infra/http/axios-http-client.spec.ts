@@ -7,11 +7,11 @@ vi.mock("axios");
 const makeSut = () => new AxiosHttpClient();
 
 describe("AxiosHttpClient", () => {
-  it("should call axios with correct url", () => {
+  it("should call axios with correct url and verb", () => {
     const sut = makeSut();
     const url = faker.internet.url();
 
     sut.post({ url, body: {} });
-    expect(axios).toHaveBeenCalledWith(url);
+    expect(axios.post).toHaveBeenCalledWith(url);
   });
 });
