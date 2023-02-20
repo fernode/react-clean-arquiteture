@@ -29,7 +29,7 @@ describe("RemoteAuthentication", () => {
     const url = faker.internet.url();
     const { sut, httpClientSpy } = makeSut(url);
     httpClientSpy.response = {
-      status: HttpStatusCode.ok,
+      statusCode: HttpStatusCode.ok,
     };
     await sut.auth(MockAuthentication());
 
@@ -40,7 +40,7 @@ describe("RemoteAuthentication", () => {
     const { sut, httpClientSpy } = makeSut();
     const body = MockAuthentication();
     httpClientSpy.response = {
-      status: HttpStatusCode.ok,
+      statusCode: HttpStatusCode.ok,
     };
     await sut.auth(body);
 
@@ -50,7 +50,7 @@ describe("RemoteAuthentication", () => {
   it("Should throw InvalidCrendencialError if HttpClient returns 401", async () => {
     const { sut, httpClientSpy } = makeSut();
     httpClientSpy.response = {
-      status: HttpStatusCode.unauthorized,
+      statusCode: HttpStatusCode.unauthorized,
     };
 
     const promise = sut.auth(MockAuthentication());
@@ -61,7 +61,7 @@ describe("RemoteAuthentication", () => {
   it("Should throw UnexpectedErorr if HttpClient returns 400", async () => {
     const { sut, httpClientSpy } = makeSut();
     httpClientSpy.response = {
-      status: HttpStatusCode.badRequest,
+      statusCode: HttpStatusCode.badRequest,
     };
 
     const promise = sut.auth(MockAuthentication());
@@ -72,7 +72,7 @@ describe("RemoteAuthentication", () => {
   it("Should throw ServerError if HttpClient returns 500", async () => {
     const { sut, httpClientSpy } = makeSut();
     httpClientSpy.response = {
-      status: HttpStatusCode.serverError,
+      statusCode: HttpStatusCode.serverError,
     };
 
     const promise = sut.auth(MockAuthentication());
@@ -84,7 +84,7 @@ describe("RemoteAuthentication", () => {
     const { sut, httpClientSpy } = makeSut();
     const httpResult = MockAccountModel();
     httpClientSpy.response = {
-      status: HttpStatusCode.ok,
+      statusCode: HttpStatusCode.ok,
       body: httpResult,
     };
 

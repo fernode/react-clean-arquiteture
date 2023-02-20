@@ -18,7 +18,7 @@ export class HttpPostClientSpy
   url?: string;
   body?: AuthenticationParams;
   response: HttpResponse<AccountModel> = {
-    status: HttpStatusCode.ok,
+    statusCode: HttpStatusCode.ok,
     body: {
       name: faker.name.fullName(),
       accessToken: faker.datatype.uuid(),
@@ -31,7 +31,7 @@ export class HttpPostClientSpy
     this.url = params.url;
     this.body = params.body;
 
-    switch (this.response.status) {
+    switch (this.response.statusCode) {
       case HttpStatusCode.ok:
         return this.response;
       case HttpStatusCode.unauthorized:
