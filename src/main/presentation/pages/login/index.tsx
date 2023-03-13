@@ -1,6 +1,6 @@
-import { Grid, Typography, Box, TextField, Button } from "@mui/material";
-import Background from "./assets/background.jpg";
-import * as S from "./styles";
+import { Grid, Typography, TextField, Button } from '@mui/material'
+import Background from './assets/background.jpg'
+import * as S from './styles'
 
 export function Login() {
   return (
@@ -9,35 +9,35 @@ export function Login() {
         <S.BoxImageContainer>
           <img
             src={Background}
-            alt='Imagem de um computador com códigos na tela'
+            alt="Imagem de um computador com códigos na tela"
           />
         </S.BoxImageContainer>
       </Grid>
 
       <Grid item xs={5}>
-        <S.BoxFormContainer component='form'>
-          <Typography variant='h2' color='initial'>
+        <S.BoxFormContainer component="form">
+          <Typography variant="h2" color="initial">
             Entrar
           </Typography>
           <TextField
-            className='form__input'
-            id='Email'
-            label='Email'
-            variant='standard'
-            type='email'
+            className="form__input"
+            id="Email"
+            label="Email"
+            variant="standard"
+            type="email"
           />
           <TextField
-            className='form__input'
-            id='Password'
-            label='Password'
-            variant='standard'
-            type='password'
+            className="form__input"
+            id="Password"
+            label="Password"
+            variant="standard"
+            type="password"
           />
-          <Button className='form__button' variant='contained' type='submit'>
+          <Button className="form__button" variant="contained" type="submit">
             Entrar
           </Button>
         </S.BoxFormContainer>
       </Grid>
     </Grid>
-  );
+  )
 }

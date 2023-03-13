@@ -1,13 +1,13 @@
-import { Login } from "./presentation/pages/login";
-import CssBaseline from "@mui/material/CssBaseline";
+import { Login } from './presentation/pages/login'
+import CssBaseline from '@mui/material/CssBaseline'
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <CssBaseline />
       <Login />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
