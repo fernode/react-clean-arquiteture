@@ -1,6 +1,7 @@
 import { Grid, Typography, TextField, Button } from '@mui/material'
 import Background from './assets/background.jpg'
 import * as S from './styles'
+import { FormLogin } from './components/form-login'
 
 export function Login() {
   return (
@@ -14,30 +15,7 @@ export function Login() {
         </S.BoxImageContainer>
       </Grid>
 
-      <Grid item xs={5}>
-        <S.BoxFormContainer component="form">
-          <Typography variant="h2" color="initial">
-            Entrar
-          </Typography>
-          <TextField
-            className="form__input"
-            id="Email"
-            label="Email"
-            variant="standard"
-            type="email"
-          />
-          <TextField
-            className="form__input"
-            id="Password"
-            label="Password"
-            variant="standard"
-            type="password"
-          />
-          <Button className="form__button" variant="contained" type="submit">
-            Entrar
-          </Button>
-        </S.BoxFormContainer>
-      </Grid>
+      <FormLogin />
     </Grid>
   )
 }
