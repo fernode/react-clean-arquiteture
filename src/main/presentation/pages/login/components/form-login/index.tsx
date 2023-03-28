@@ -1,5 +1,4 @@
 import { Button, Grid, TextField, Typography } from '@mui/material'
-import React from 'react'
 import * as S from './styles'
 
 export function FormLogin() {
@@ -24,7 +23,7 @@ export function FormLogin() {
           type="password"
         />
         <Button className="form__button" variant="contained" type="submit">
-          Entrar
+          Login
         </Button>
       </S.BoxFormContainer>
     </Grid>
