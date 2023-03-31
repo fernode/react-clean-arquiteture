@@ -44,13 +44,23 @@ describe('<FormLogin/>', () => {
     expect(passwordInput).toHaveValue('password123')
   })
 
-  it('should call validation with correct values', async () => {
+  it('should call validation with correct email', async () => {
     const { container, validationSpy } = makeSut()
     const emailInput = container.querySelector('input[type="email"]')
 
     await userEvent.type(emailInput, 'VALID_EMAIL')
     expect(validationSpy.input).toEqual({
       email: 'VALID_EMAIL',
+    })
+  })
+
+  it('should call validation with correct password', async () => {
+    const { container, validationSpy } = makeSut()
+    const passwordInput = container.querySelector('input[type="password"]')
+
+    await userEvent.type(passwordInput, 'VALID_PASSWORD')
+    expect(validationSpy.input).toEqual({
+      password: 'VALID_PASSWORD',
     })
   })
 })
