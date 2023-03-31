@@ -3,19 +3,7 @@ import { render } from '@testing-library/react'
 import { FormLogin } from './'
 import userEvent from '@testing-library/user-event'
 import { describe, it } from 'vitest'
-
-class ValidationSpy implements Validation {
-  errorMessage: string
-  inputName: string
-  inputValue: string
-
-  validate(inputName: string, inputValue: string): string {
-    this.inputName = inputName
-    this.inputValue = inputValue
-
-    return this.errorMessage
-  }
-}
+import { ValidationSpy } from '@/main/presentation/tests'
 
 const makeSut = () => {
   const validationSpy = new ValidationSpy()
