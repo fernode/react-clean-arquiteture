@@ -21,6 +21,10 @@ export function FormLogin({ validation }: Props) {
     validation.validate({ email: formState.email })
   }, [formState.email])
 
+  useEffect(() => {
+    validation.validate({ password: formState.password })
+  }, [formState.password])
+
   return (
     <Grid item xs={5}>
       <S.BoxFormContainer component="form">
