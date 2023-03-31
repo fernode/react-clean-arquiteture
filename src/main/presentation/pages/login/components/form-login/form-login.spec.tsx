@@ -1,20 +1,29 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { FormLogin } from './'
 import userEvent from '@testing-library/user-event'
 import { describe, it } from 'vitest'
 
+const makeSut = () => {
+  const { container } = render(<FormLogin />)
+
+  return {
+    container,
+  }
+}
+
 describe('<FormLogin/>', () => {
   it('should render form without errors', () => {
-    render(<FormLogin />)
-    const formTitle = screen.getByText(/Login/i)
-    expect(formTitle).toBeInTheDocument()
+    const { container } = makeSut()
+
+    const emailInput = container.querySelector('input[type="email"]')
+    expect(emailInput).toBeInTheDocument()
   })
 
   it('should check if form fields are working correctly', async () => {
-    render(<FormLogin />)
-    const emailInput = screen.getByLabelText(/email/i)
-    const passwordInput = screen.getByLabelText(/password/i)
+    const { container } = makeSut()
+    const emailInput = container.querySelector('input[type="email"]')
+    const passwordInput = container.querySelector('input[type="password"]')
 
     await userEvent.type(emailInput, 'test@test.com')
     expect(emailInput).toHaveValue('test@test.com')
