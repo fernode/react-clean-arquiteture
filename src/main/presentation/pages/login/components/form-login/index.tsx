@@ -18,11 +18,11 @@ export function FormLogin({ validation }: Props) {
   }
 
   useEffect(() => {
-    validation.validate({ email: formState.email })
+    validation.validate('email', formState.email)
   }, [formState.email])
 
   useEffect(() => {
-    validation.validate({ password: formState.password })
+    validation.validate('password', formState.password)
   }, [formState.password])
 
   return (

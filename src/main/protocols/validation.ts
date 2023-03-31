@@ -1,3 +1,3 @@
 interface Validation {
-  validate(input: object): string
+  validate(inputName: string, inputValue: string): string
 }

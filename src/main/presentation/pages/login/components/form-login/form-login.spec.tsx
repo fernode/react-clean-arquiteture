@@ -6,10 +6,13 @@ import { describe, it } from 'vitest'
 
 class ValidationSpy implements Validation {
   errorMessage: string
-  input: object
+  inputName: string
+  inputValue: string
 
-  validate(input: object): string {
-    this.input = input
+  validate(inputName: string, inputValue: string): string {
+    this.inputName = inputName
+    this.inputValue = inputValue
+
     return this.errorMessage
   }
 }
@@ -49,9 +52,8 @@ describe('<FormLogin/>', () => {
     const emailInput = container.querySelector('input[type="email"]')
 
     await userEvent.type(emailInput, 'VALID_EMAIL')
-    expect(validationSpy.input).toEqual({
-      email: 'VALID_EMAIL',
-    })
+    expect(validationSpy.inputName).toBe('email')
+    expect(validationSpy.inputValue).toBe('VALID_EMAIL')
   })
 
   it('should call validation with correct password', async () => {
@@ -59,8 +61,7 @@ describe('<FormLogin/>', () => {
     const passwordInput = container.querySelector('input[type="password"]')
 
     await userEvent.type(passwordInput, 'VALID_PASSWORD')
-    expect(validationSpy.input).toEqual({
-      password: 'VALID_PASSWORD',
-    })
+    expect(validationSpy.inputName).toBe('password')
+    expect(validationSpy.inputValue).toBe('VALID_PASSWORD')
   })
 })
