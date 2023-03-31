@@ -4,11 +4,23 @@ import { FormLogin } from './'
 import userEvent from '@testing-library/user-event'
 import { describe, it } from 'vitest'
 
+class ValidationSpy implements Validation {
+  errorMessage: string
+  input: object
+
+  validate(input: object): string {
+    this.input = input
+    return this.errorMessage
+  }
+}
+
 const makeSut = () => {
-  const { container } = render(<FormLogin />)
+  const validationSpy = new ValidationSpy()
+  const { container } = render(<FormLogin validation={validationSpy} />)
 
   return {
     container,
+    validationSpy,
   }
 }
 
@@ -30,5 +42,15 @@ describe('<FormLogin/>', () => {
 
     await userEvent.type(passwordInput, 'password123')
     expect(passwordInput).toHaveValue('password123')
+  })
+
+  it('should call validation with correct values', async () => {
+    const { container, validationSpy } = makeSut()
+    const emailInput = container.querySelector('input[type="email"]')
+
+    await userEvent.type(emailInput, 'VALID_EMAIL')
+    expect(validationSpy.input).toEqual({
+      email: 'VALID_EMAIL',
+    })
   })
 })
